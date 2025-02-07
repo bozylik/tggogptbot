@@ -22,7 +22,7 @@ func main() {
 	}()
 
 	// Инициализация бота с telegram api
-	bot, err := tgbotapi.NewBotAPI("7677212032:AAFM9CATiTP8Cv1X8clInPqqhRq-m_gUNFw")
+	bot, err := tgbotapi.NewBotAPI("YOUR_TOKEN")
 
 	// Обработка ошибок
 	if err != nil {
