@@ -22,7 +22,7 @@ func main() {
 	}()
 
 	// Инициализация бота с telegram api
-	bot, err := tgbotapi.NewBotAPI("YOUR_API")
+	bot, err := tgbotapi.NewBotAPI("7677212032:AAFM9CATiTP8Cv1X8clInPqqhRq-m_gUNFw")
 
 	// Обработка ошибок
 	if err != nil {
@@ -85,13 +85,13 @@ func messageHandler(bot *tgbotapi.BotAPI, messagesChannel chan tgbotapi.Update) 
 		// Добавление (сохранение) контекста от пользователя к нашему слайсу
 		err := user.ContextArray.AddContext(update.Message.Text, object1)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 
 		// Добавление (сохранение) контекста от бота к нашему слайсу
 		err = user.ContextArray.AddContext(result, object2)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 
 		// Отправка сообщения
@@ -115,8 +115,7 @@ func aiRequest(message string) string {
 
 	// Обработка ошибок http запроса
 	if err != nil {
-		log.Print(err)
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Создание мапы для преобразования полученного ответа из json в string
@@ -126,7 +125,7 @@ func aiRequest(message string) string {
 
 	// Обработка ошибок
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Возврат результата запроса, преобразованного к типу string (преобразование интерфейсов)

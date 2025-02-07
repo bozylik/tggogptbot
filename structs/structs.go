@@ -2,6 +2,7 @@ package structs
 
 import (
 	"errors"
+	"strings"
 )
 
 type Bot bool
@@ -36,7 +37,6 @@ func newContext() context {
 	result := context{
 		currentSizeIndex: -1,
 		// Размер контекста для пользователя (в данном случа 3 сообщения от бота, 3 от пользователя)
-		// При масштабировани проекта и добавлением базы данных могут возникнуть проблемы
 		size: 6,
 	}
 
@@ -48,7 +48,7 @@ func newContext() context {
 func (c *context) AddContext(newContext string, t any) error {
 	newContextArray := make([]string, c.size)
 
-	// Проверка на переполнение контекста (можно заменить стандартными len и capacity)
+	// Проверка на переполнение контекста
 	if c.currentSizeIndex+1 >= c.size {
 		j := 0
 		for i := c.size / 2; i < c.size; i++ {
@@ -80,21 +80,10 @@ func (c *context) AddContext(newContext string, t any) error {
 func (c context) GetContext() string {
 	// Промпт для объяснения чат gpt контекста
 	var context string = "История моих прошлых сообщений в скобках, проанализируй её перед ответом на сообщение после скобок ["
-	isEmptyContext := true
 
 	// Собираем контекст и добавляем к строке контекста
-	// Можно заменить стандартным strings.Join или strings.Builder
-	for _, message := range c.array {
-		if message != "" {
-			context += message
-			isEmptyContext = false
-		}
-	}
+	contextFromSlice := strings.Join(c.array, "")
+	context += contextFromSlice + "]"
 
-	// Если контекста нет, то возвращаем пустой контекст
-	if isEmptyContext {
-		return ""
-	}
-
-	return context + "]"
+	return context
 }
