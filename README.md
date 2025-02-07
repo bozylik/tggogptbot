@@ -14,3 +14,7 @@
 - Интеграция с **базой данных** для хранения данных и контекста.
 
 Проект подходит как для начинающих, так и для тех, кто хочет расширить свои знания и навыки в **Go** и **Telegram API**.
+
+Источники:
+- go-telegram-bot=api: github.com/go-telegram-bot-api/telegram-bot-api
+- Free-gpt-api-no-key-needed: https://github.com/matefs/Free-gpt-api-no-key-needed
